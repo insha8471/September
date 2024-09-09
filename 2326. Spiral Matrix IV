@@ -1,0 +1,47 @@
+Time complexity : O(m*n)
+
+
+class Solution {
+    public int[][] spiralMatrix(int m, int n, ListNode head) {
+        int[][] matrix = new int[m][n];
+
+        for(int[] mat : matrix) {
+            Arrays.fill(mat, -1);
+        }
+
+        int top = 0, bottom = m-1;
+        int left = 0, right = n-1; 
+        ListNode curr = head;
+        while(curr != null) {
+            // left to right
+            for(int j=left;j<=right && curr != null;j++) {
+                matrix[top][j] = curr.val;
+                curr = curr.next;
+            }
+            top++;
+
+            // top to down
+            for(int i=top;i<=bottom && curr != null;i++) {
+                matrix[i][right] = curr.val;
+                curr = curr.next;
+            }
+
+            right--;
+
+            // right to left 
+            for(int j=right;j>=left && curr != null;j--) {
+                matrix[bottom][j] = curr.val;
+                curr = curr.next;
+            }
+            bottom--;
+
+            //down to top
+            for(int i=bottom;i>=top && curr != null;i--){
+                matrix[i][left] = curr.val;
+                curr = curr.next;
+            }
+            left++;
+        }
+        return matrix;
+    }
+}
