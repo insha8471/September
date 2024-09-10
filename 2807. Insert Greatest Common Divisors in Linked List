@@ -1,0 +1,26 @@
+Time complexity : O(n)
+
+class Solution {
+    public int gcd(int a, int b) {
+        if(b == 0) {
+            return a;
+        }
+
+        return gcd(b, a%b);
+    }
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode curr = head;
+        ListNode prev = head;
+
+        while(curr != null && curr.next != null) {
+            int gcd = gcd(curr.val, curr.next.val);
+            curr = curr.next;
+            ListNode temp = new ListNode(gcd);
+            
+            prev.next = temp;
+            prev.next.next = curr;
+            prev = prev.next.next;
+        }
+        return head;
+    }
+}
