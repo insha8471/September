@@ -1,0 +1,21 @@
+class Solution {
+    public void solve(int curr, List<Integer> ls, int n) {
+        if(curr > n) {
+            return;
+        }
+
+        ls.add(curr);
+        for(int i=0;i<=9;i++) {
+            int val = curr*10 + i;
+            if(val > n) return;
+            solve(val, ls,n);
+        }
+    }
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> res = new ArrayList<>();
+        for(int i=1;i<=9;i++) {
+            solve(i, res, n);
+        }
+        return res;
+    }
+}
