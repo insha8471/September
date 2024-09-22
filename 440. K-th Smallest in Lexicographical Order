@@ -1,0 +1,34 @@
+Time complexity : O((log10(n))^2)
+space complexity : O(1)
+
+class Solution {
+    public int count(long curr, long next , int k, int n) {
+        int countNum = 0;
+
+        while(curr <= n) {
+            countNum += (next - curr);
+
+            curr *= 10;
+            next *= 10;
+            next = Math.min(next, (long)n+1);
+        }
+        return countNum;
+    }
+    public int findKthNumber(int n, int k) {
+        int curr = 1;
+        k--;
+
+        while(k > 0) {
+            int count = count(curr,curr+1,k,n);
+
+            if(count <= k) {
+                curr++;
+                k -= count;
+            }else{
+                curr *= 10;
+                k -= 1;
+            }
+        }
+        return curr;
+    }
+}
